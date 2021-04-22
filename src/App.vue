@@ -1,26 +1,58 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+<div class=" relative min-h-screen overflow-x-hidden body">
+
+  <NavBar @closeNav='handleToggle'/>
+  <div ref="body" class="absolute top-0 left-0 z-10 min-h-screen w-full">
+    <div class='bg-gray-300 min-h-screen '>
+
+      <nav>
+        <div @click='handleToggle' class='w-16 h-12 border-2 border-blue-500'>
+          Toggle open
+        </div>
+      </nav>
+      <div>
+        Main
+      </div>
+    </div>
+  </div>
+</div>
+  
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import NavBar from '@/components/NavBar.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    NavBar
+  },
+  methods:{
+    handleToggle(){
+      const body=this.$refs.body
+      if(body.classList.contains('top-0')){
+        body.classList.remove('top-0')
+        body.classList.remove('left-0')
+        body.classList.remove('min-h-screen')
+        body.style.top= '30%'
+        body.style.left= '90%'
+        body.style.minHeight= '90vh'
+        
+      }else{
+        body.style.top= '0%'
+        body.style.left= '0%'
+        body.style.minHeight= '100vh'
+        body.classList.add('top-0')
+        body.classList.add('left-0')
+        body.classList.add('min-h-screen')
+      }
+    }
   }
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+.body{
+  overflow-x: hidden;
 }
 </style>
